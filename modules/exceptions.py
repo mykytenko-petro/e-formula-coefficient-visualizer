@@ -1,0 +1,3 @@
+
+class TooSmallArrayError(Exception):
+    pass
