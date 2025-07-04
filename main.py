@@ -2,7 +2,7 @@ import modules
 
 def main():
     try:
-        modules.run()
+        modules.window.mainloop()
     except Exception as error:
         print(error)
 
