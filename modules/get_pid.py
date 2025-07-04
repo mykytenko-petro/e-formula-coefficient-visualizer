@@ -1,4 +1,4 @@
-from exceptions import *
+from modules.exceptions import ValueOutOfRangeError, TooSmallArrayError
 
 def get_pid(line_arr: list[int], KP: float, KD: float):
     final_arr = []
