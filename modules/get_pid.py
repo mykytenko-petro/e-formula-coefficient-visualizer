@@ -14,3 +14,11 @@ def get_pid(line_arr: list[int], KP: float, KD: float):
 
     return final_arr
 
+def get_errors(line_arr: list[int]):
+    if max(line_arr) > 7000 or min(line_arr) < 0:
+        raise ValueOutOfRangeError()
+
+    return list(map(lambda x: x - 3500, line_arr))
+
+arr = [0, 7000, 3500]
+print(get_errors(arr))
