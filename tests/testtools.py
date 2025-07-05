@@ -2,7 +2,7 @@ from random import randint
 
 class TestTools:
     @staticmethod
-    def get_random_values_for_get_errors():
+    def get_random_values():
         values = []
         for i in range(0, 10):
             original_vals = []
@@ -14,4 +14,12 @@ class TestTools:
             values.append((original_vals, error_vals))
         return values
 
-print(TestTools.get_random_values_for_get_errors())
+    @staticmethod
+    def get_wrong_values():
+        values = []
+        for i in range(0, 5):
+            values.append((list([randint(-1000, -1) for i in range(0, 10)])))
+        for i in range(0, 5):
+            values.append((list([randint(7001, 8000) for i in range(0, 10)])))
+
+        return values
