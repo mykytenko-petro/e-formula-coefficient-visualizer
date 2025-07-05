@@ -48,4 +48,3 @@ def get_errors(line_arr: list[int]) -> int|list:
         raise -1
 
     return list(map(lambda x: x - 3500, line_arr))
-
