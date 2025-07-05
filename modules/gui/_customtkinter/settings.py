@@ -1,4 +1,5 @@
 import os
+import sys
 
 import customtkinter as ctk
 from tkinter import PhotoImage
@@ -10,6 +11,23 @@ class Window(ctk.CTk):
             self,
             fg_color=color_palette["primary"]
         )
+
+        self.protocol("WM_DELETE_WINDOW", self._on_exit)
+
+        self.title("e-formula coefficient visualizer")
+        #if os.name == "nt":
+        #    self.iconbitmap(
+        #        os.path.abspath(
+        #            path=os.path.join(
+        #                __file__,
+        #                "..", "..", "..", "..",
+        #                "static", "icons", "icon.ico"
+        #            )
+        #        )
+        #    )
+        #elif os.name == "posix":
+        #    ...
+        
         self.iconphoto(True, PhotoImage(
             file=os.path.abspath(path=os.path.join(
                 __file__, "..", "..", "..", "..",
@@ -18,7 +36,9 @@ class Window(ctk.CTk):
                 )
             )
         )
-        self.title("e-formula coefficient visualizer")
         self.geometry("960x540")
+
+    def _on_exit(self):
+        sys.exit()
 
 window = Window()

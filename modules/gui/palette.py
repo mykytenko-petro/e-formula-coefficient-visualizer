@@ -4,7 +4,6 @@ class Palette(TypedDict):
     primary: str
     secondary: str
     border: str
-    button_fg: str
     hover: str
     text: str
 
