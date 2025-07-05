@@ -19,8 +19,8 @@ def get_coefficients_path() -> str:
 class ValueHolderWidget(ctk.CTkFrame):
     def __init__(
         self,
-        master: ctk.CTkFrame,
-        value_name: str
+        master : ctk.CTkScrollableFrame,
+        value_name : str
     ):
         ctk.CTkFrame.__init__(
             self,
@@ -100,7 +100,7 @@ class ValueTab(ctk.CTkScrollableFrame):
             scrollbar_button_hover_color=color_palette["hover"]
         )
 
-        list_of_coefficients: dict = read_json(
+        list_of_coefficients = read_json(
             path=get_coefficients_path()
         ).keys()
 
