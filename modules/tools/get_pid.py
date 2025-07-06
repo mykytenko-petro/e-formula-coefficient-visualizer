@@ -1,5 +1,3 @@
-from exceptions import *
-
 def get_pid(line_arr: list[int], KP: float=0, KI: float=0, KD: float=0) -> int|list:
     """
     This function makes pid values of line error values.
