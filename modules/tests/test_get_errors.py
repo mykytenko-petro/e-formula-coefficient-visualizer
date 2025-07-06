@@ -16,4 +16,4 @@ def test_get_errors_2(arr):
     """
     Checking if function reacts on wrong values
     """
-    #get_errors(arr) == -1
+    get_errors(arr) == -1
