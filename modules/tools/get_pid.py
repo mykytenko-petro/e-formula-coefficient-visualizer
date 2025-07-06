@@ -45,7 +45,7 @@ def get_errors(line_arr: list[int]) -> int|list:
     Returns final array in successful case
     """
     if max(line_arr) > 7000 or min(line_arr) < 0:
-        raise -1
+        return -1
 
     return list(map(lambda x: x - 3500, line_arr))
 
