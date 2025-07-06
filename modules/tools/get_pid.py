@@ -11,8 +11,10 @@ def get_pid(line_arr: list[int], KP: float=0, KI: float=0, KD: float=0) -> int|l
     Returns final array in successful case
     """
 
-    if (not isinstance(line_arr, list) and
-    isinstance(KP, int) and isinstance(KI, int) and isinstance(KD, int)):
+    if not (isinstance(line_arr, list) and
+            (isinstance(KP, float) or isinstance(KP, int)) and
+            (isinstance(KI, float) or isinstance(KI, int)) and
+            (isinstance(KD, float) or isinstance(KD, int))):
         return -1
 
     integral = 0
@@ -20,11 +22,11 @@ def get_pid(line_arr: list[int], KP: float=0, KI: float=0, KD: float=0) -> int|l
     lenght = len(line_arr)
     line_arr = get_errors(line_arr)
 
-    if line_arr == -1:
-        return -3
-
     if lenght < 2:
         return -2
+
+    if line_arr == -1:
+        return -3
 
     for error_number in range(1, lenght):
         error = line_arr[error_number]
@@ -42,6 +44,8 @@ def get_errors(line_arr: list[int]) -> int|list:
     Returns -1 in ase of line_arr values are out of range
     Returns final array in successful case
     """
+    if len(line_arr) < 1:
+        return -1
     if max(line_arr) > 7000 or min(line_arr) < 0:
         return -1
 
