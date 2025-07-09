@@ -17,6 +17,9 @@ def get_pid(line_arr: list[int], KP: float=0, KI: float=0, KD: float=0) -> int |
             (isinstance(KD, float) or isinstance(KD, int))):
         return -1
 
+    MAX_VALUE = 255
+    MIN_VALUE = 0
+
     integral = 0
     final_arr = []
     lenght = len(line_arr)
@@ -31,6 +34,12 @@ def get_pid(line_arr: list[int], KP: float=0, KI: float=0, KD: float=0) -> int |
     for error_number in range(lenght):
         error = line_arr[error_number]
         res = KP * error + KI * integral + KD * line_arr[error_number-1]
+
+        if res > MAX_VALUE:
+            res = MAX_VALUE
+        elif res < MIN_VALUE:
+            res = MIN_VALUE
+
         final_arr.append(res)
 
         integral += error
