@@ -2,7 +2,7 @@ import os
 import customtkinter as ctk
 
 from ...tools import calculate_pid
-from ...utils import read_txt
+from ...utils import txt_str_to_int
 from .._matplotlib import CTkGraph
 from ..palette import color_palette
 from .widgets import TransparentWidget
@@ -11,7 +11,7 @@ from .settings import window
 def plot_pid_values(graph : CTkGraph):
     pid_list = calculate_pid()
 
-    raw_line_value_list = read_txt(
+    raw_line_value_list = txt_str_to_int(
         path=os.path.abspath(
             path=os.path.join(
                 __file__,
@@ -19,7 +19,7 @@ def plot_pid_values(graph : CTkGraph):
                 "txt", "way.txt"
             )
         )
-    ).split(",")
+    )
 
     graph.plot(
         x_axis=raw_line_value_list,
@@ -38,8 +38,8 @@ class ContentFrame(TransparentWidget):
 
         self.graph = CTkGraph(
             master=self,
-            width=650,
-            height=500,
+            width=900,
+            height=650,
             title="delta speed/qtr8 values graph",
             xlabel="delta speed",
             ylabel="qtr8 values"

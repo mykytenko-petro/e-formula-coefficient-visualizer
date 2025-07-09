@@ -1,6 +1,6 @@
 import os
 
-from ..utils import read_json, read_txt
+from ..utils import read_json, txt_str_to_int
 from .get_pid import get_pid
 from .types import CoefficientPayload
 
@@ -15,7 +15,7 @@ def calculate_pid() -> list | None:
         )
     )
 
-    raw_line_value_list = read_txt(
+    line_value_list = txt_str_to_int(
         path=os.path.abspath(
             path=os.path.join(
                 __file__,
@@ -23,11 +23,7 @@ def calculate_pid() -> list | None:
                 "txt", "way.txt"
             )
         )
-    ).split(",")
-
-    line_value_list: list[int] = []
-    for value in raw_line_value_list:
-        line_value_list.append(int(value))
+    )
 
     pid_value_list = get_pid(
         line_arr=line_value_list,

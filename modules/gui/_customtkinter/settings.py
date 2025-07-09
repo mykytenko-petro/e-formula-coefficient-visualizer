@@ -37,7 +37,7 @@ class Window(ctk.CTk):
                     )
                 )
             )
-        self.geometry("960x540")
+        self.geometry("1280x720+50+50")
 
     def _on_exit(self):
         sys.exit()
