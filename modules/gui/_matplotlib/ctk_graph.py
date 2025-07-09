@@ -1,12 +1,16 @@
 import customtkinter as ctk
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.backends._backend_tk import NavigationToolbar2Tk
+import numpy
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.figure import Figure
+
 
 class CTkGraph(ctk.CTkFrame):
     def __init__(
             self,
             master : ctk.CTkBaseClass,
+            title : str = "",
+            xlabel : str = "",
+            ylabel : str = "",
             **kwargs
         ):
 
@@ -18,12 +22,22 @@ class CTkGraph(ctk.CTkFrame):
 
         self.pack_propagate(False)
 
-        fig, ax = plt.subplots()
+        # matplotlib part
+        self._fig = Figure()
+        self._ax = self._fig.add_subplot()
+
+        self._ax.set_title(title)
+        self._ax.set_xlabel(xlabel)
+        self._ax.set_ylabel(ylabel)
+
+        # tkinter part
         self._figure_canvas = FigureCanvasTkAgg(
-            figure=fig,
+            figure=self._fig,
             master=self
         )
-        self._figure_canvas.get_tk_widget().pack(
+
+        self.figure_widget = self._figure_canvas.get_tk_widget()
+        self.figure_widget.pack(
             side=ctk.TOP,
             fill=ctk.BOTH,
             expand=True
@@ -39,5 +53,18 @@ class CTkGraph(ctk.CTkFrame):
 
         self.plot()
 
-    def plot(self):
+    def plot(
+            self,
+            first_axis : list | None = None,
+            second_axis : list | None = None
+        ):
+        self._ax.clear()
+
+        self._ax.plot(
+            numpy.array(first_axis),
+            numpy.array(second_axis),
+            marker='o',
+            color="r" 
+        )
+
         self._figure_canvas.draw()
