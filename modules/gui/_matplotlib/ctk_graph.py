@@ -64,10 +64,13 @@ class CTkGraph(ctk.CTkFrame):
         self._ax.set_xlabel(self.xlabel)
         self._ax.set_ylabel(self.ylabel)
 
+        x_array = numpy.array(x_axis)
+        y_array = numpy.array(y_axis)
+
         self._ax.plot(
-            numpy.array(y_axis),
-            numpy.array(x_axis),
-            'o',
+            y_array,
+            x_array,
+            marker='o',
             color="r" 
         )
 
