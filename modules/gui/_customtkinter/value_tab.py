@@ -38,7 +38,7 @@ class ValueHolderWidget(ctk.CTkFrame):
         for widget in self.pack_slaves():
             widget.pack_forget()
 
-        list_of_coefficients: dict[str, int] = read_json(
+        list_of_coefficients: dict[str, float] = read_json(
             path=get_coefficients_path()
         )
 
@@ -83,7 +83,7 @@ class ValueHolderWidget(ctk.CTkFrame):
     def update_value(self):
         update_json(
             path=get_coefficients_path(),
-            data={self.value_name: int(self.value_var.get())}
+            data={self.value_name: float(self.value_var.get())}
         )
         self.render()
 

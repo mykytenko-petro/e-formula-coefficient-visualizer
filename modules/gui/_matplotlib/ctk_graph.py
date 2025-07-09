@@ -14,6 +14,10 @@ class CTkGraph(ctk.CTkFrame):
             **kwargs
         ):
 
+        self.title = title
+        self.xlabel = xlabel
+        self.ylabel = ylabel
+
         ctk.CTkFrame.__init__(
             self,
             master=master,
@@ -25,10 +29,6 @@ class CTkGraph(ctk.CTkFrame):
         # matplotlib part
         self._fig = Figure()
         self._ax = self._fig.add_subplot()
-
-        self._ax.set_title(title)
-        self._ax.set_xlabel(xlabel)
-        self._ax.set_ylabel(ylabel)
 
         # tkinter part
         self._figure_canvas = FigureCanvasTkAgg(
@@ -55,15 +55,19 @@ class CTkGraph(ctk.CTkFrame):
 
     def plot(
             self,
-            first_axis : list | None = None,
-            second_axis : list | None = None
+            x_axis : list | None = None,
+            y_axis : list | None = None
         ):
         self._ax.clear()
 
+        self._ax.set_title(self.title)
+        self._ax.set_xlabel(self.xlabel)
+        self._ax.set_ylabel(self.ylabel)
+
         self._ax.plot(
-            numpy.array(first_axis),
-            numpy.array(second_axis),
-            marker='o',
+            numpy.array(y_axis),
+            numpy.array(x_axis),
+            'o',
             color="r" 
         )
 

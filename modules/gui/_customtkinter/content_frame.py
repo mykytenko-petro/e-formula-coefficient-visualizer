@@ -1,12 +1,30 @@
 import os
-
 import customtkinter as ctk
 
+from ...tools import calculate_pid
 from ...utils import read_txt
 from .._matplotlib import CTkGraph
 from ..palette import color_palette
 from .widgets import TransparentWidget
 from .settings import window
+
+def plot_pid_values(graph : CTkGraph):
+    pid_list = calculate_pid()
+
+    raw_line_value_list = read_txt(
+        path=os.path.abspath(
+            path=os.path.join(
+                __file__,
+                "..", "..", "..", "..",
+                "txt", "way.txt"
+            )
+        )
+    ).split(",")
+
+    graph.plot(
+        x_axis=raw_line_value_list,
+        y_axis=pid_list
+    )
 
 class ContentFrame(TransparentWidget):
     def __init__(
@@ -21,7 +39,10 @@ class ContentFrame(TransparentWidget):
         self.graph = CTkGraph(
             master=self,
             width=650,
-            height=500
+            height=500,
+            title="delta speed/qtr8 values graph",
+            xlabel="delta speed",
+            ylabel="qtr8 values"
         )
 
         self.graph.pack(
@@ -36,26 +57,7 @@ class ContentFrame(TransparentWidget):
             hover_color=color_palette["secondary"],
             text="plot result",
             text_color=color_palette["text"],
-            command=lambda: self.graph.plot(
-                first_axis=read_txt(
-                    path=os.path.abspath(
-                        path=os.path.join(
-                            __file__,
-                            "..", "..", "..", "..",
-                            "txt", "way.txt"
-                        )
-                    )
-                ).split(sep=","),
-                second_axis=read_txt(
-                    path=os.path.abspath(
-                        path=os.path.join(
-                            __file__,
-                            "..", "..", "..", "..",
-                            "txt", "way.txt"
-                        )
-                    )
-                ).split(sep=",")
-            )
+            command=lambda: plot_pid_values(graph= self.graph)
         )
 
         self.plot_button.pack(
