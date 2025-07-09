@@ -34,7 +34,7 @@ def get_pid(line_arr: list[int], KP: float=0, KI: float=0, KD: float=0) -> int |
     for error_number in range(lenght):
         error = line_arr[error_number]
         res = KP * error + KI * integral + KD * line_arr[error_number-1]
-
+        res = abs(res)
         if res > MAX_VALUE:
             res = MAX_VALUE
         elif res < MIN_VALUE:
